@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sumilateur_facture/models/bill_type.dart';
+import 'package:simulateur_facture/models/bill_type.dart';
 import 'calculation_screen.dart';
-import 'package:sumilateur_facture/l10n/app_localizations_manual.dart';
+import 'package:simulateur_facture/l10n/app_localizations_manual.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

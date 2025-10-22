@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sumilateur_facture/models/bill_type.dart';
+import 'package:simulateur_facture/models/bill_type.dart';
 import '../models/settings_model.dart';
-import 'package:sumilateur_facture/l10n/app_localizations_manual.dart';
+import 'package:simulateur_facture/l10n/app_localizations_manual.dart';
 
 class CalculationScreen extends StatefulWidget {
   final BillType billType;

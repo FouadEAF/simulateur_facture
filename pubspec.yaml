@@ -1,5 +1,5 @@
-name: sumilateur_facture
-description: "Calculer combien vous conssomez dans une periode, capacite et monetaire"
+name: simulateur_facture
+description: "Calculer combient vous consommez dans une periode, capacite et monetaire"
 publish_to: 'none'
 
 version: 1.0.1+1

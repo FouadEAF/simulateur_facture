@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sumilateur_facture/models/settings_model.dart';
-import 'package:sumilateur_facture/screens/home_screen.dart';
-import 'package:sumilateur_facture/screens/settings_screen.dart';
+import 'package:simulateur_facture/models/settings_model.dart';
+import 'package:simulateur_facture/screens/home_screen.dart';
+import 'package:simulateur_facture/screens/settings_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:sumilateur_facture/l10n/app_localizations_manual.dart';
+import 'package:simulateur_facture/l10n/app_localizations_manual.dart';
 
 Future<void> main() async { // Made main async
   WidgetsFlutterBinding.ensureInitialized(); // Required for SharedPreferences

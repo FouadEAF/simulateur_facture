@@ -1,11 +1,11 @@
 {
-    "name": "sumilateur_facture",
+    "name": "simulateur_facture",
     "short_name": "simulateur",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#hexcode",
     "theme_color": "#hexcode",
-    "description": "Calculer combien vous conssomez dans une periode, capacite et monetaire",
+    "description": "Calculer combient vous consommez dans une periode, capacite et monetaire",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
