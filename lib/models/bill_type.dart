@@ -1,0 +1,4 @@
+enum BillType {
+  electricity,
+  water,
+}
