@@ -62,6 +62,21 @@ class AppLocalizationsManual {
       'email': 'Email',
       'phone': 'Phone',
       'appDescription': 'A utility app to calculate electricity and water bills based on consumption and tariff rates.',
+      'langEnglish': 'English',
+      'langFrench': 'Français',
+      'langArabic': 'العربية',
+      'electricityPuTranche1Label': 'PU Tranche 1 (0-100 kWh) (DH/kWh)',
+      'electricityPuTranche2Label': 'PU Tranche 2 (101-150 kWh) (DH/kWh)',
+      'electricityPuTranche3Label': 'PU Tranche 3 (151-210 kWh) (DH/kWh)',
+      'electricityPuTranche4Label': 'PU Tranche 4 (211-310 kWh) (DH/kWh)',
+      'electricityPuTranche5Label': 'PU Tranche 5 (311-510 kWh) (DH/kWh)',
+      'electricityPuTranche6Label': 'PU Tranche 6 (>511 kWh) (DH/kWh)',
+      'tvaLabel': 'TVA (%)',
+      'tppanLabel': 'TPPAN (DH/kWh)',
+      'waterPuTranche4Label': 'Tranche 4 (21-35 m³) (DH/m³)',
+      'waterPuTranche5Label': 'Tranche 5 (>35 m³) (DH/m³)',
+      'assainissementTranche4Label': 'Assainissement Tranche 4 (21-35 m³) (DH/m³)',
+      'assainissementTranche5Label': 'Assainissement Tranche 5 (>35 m³) (DH/m³)',
     },
     'fr': {
       'billCalculator': 'Calculateur de Facture',
@@ -113,6 +128,21 @@ class AppLocalizationsManual {
       'email': 'Email',
       'phone': 'Téléphone',
       'appDescription': 'Une application utilitaire pour calculer les factures d\'électricité et d\'eau basée sur la consommation et les tarifs.',
+      'langEnglish': 'Anglais',
+      'langFrench': 'Français',
+      'langArabic': 'Arabe',
+      'electricityPuTranche1Label': 'PU Tranche 1 (0-100 kWh) (DH/kWh)',
+      'electricityPuTranche2Label': 'PU Tranche 2 (101-150 kWh) (DH/kWh)',
+      'electricityPuTranche3Label': 'PU Tranche 3 (151-210 kWh) (DH/kWh)',
+      'electricityPuTranche4Label': 'PU Tranche 4 (211-310 kWh) (DH/kWh)',
+      'electricityPuTranche5Label': 'PU Tranche 5 (311-510 kWh) (DH/kWh)',
+      'electricityPuTranche6Label': 'PU Tranche 6 (>511 kWh) (DH/kWh)',
+      'tvaLabel': 'TVA (%)',
+      'tppanLabel': 'TPPAN (DH/kWh)',
+      'waterPuTranche4Label': 'Tranche 4 (21-35 m³) (DH/m³)',
+      'waterPuTranche5Label': 'Tranche 5 (>35 m³) (DH/m³)',
+      'assainissementTranche4Label': 'Assainissement Tranche 4 (21-35 m³) (DH/m³)',
+      'assainissementTranche5Label': 'Assainissement Tranche 5 (>35 m³) (DH/m³)',
     },
     'ar': {
       'billCalculator': 'حاسبة الفواتير',
@@ -164,58 +194,89 @@ class AppLocalizationsManual {
       'email': 'البريد الإلكتروني',
       'phone': 'الهاتف',
       'appDescription': 'تطبيق مساعد لحساب فواتير الكهرباء والماء بناءً على الاستهلاك وأسعار التعريفة.',
+      'langEnglish': 'الإنجليزية',
+      'langFrench': 'الفرنسية',
+      'langArabic': 'العربية',
+      'electricityPuTranche1Label': 'سعر الوحدة الشطر 1 (0-100 kWh) (درهم/kWh)',
+      'electricityPuTranche2Label': 'سعر الوحدة الشطر 2 (101-150 kWh) (درهم/kWh)',
+      'electricityPuTranche3Label': 'سعر الوحدة الشطر 3 (151-210 kWh) (درهم/kWh)',
+      'electricityPuTranche4Label': 'سعر الوحدة الشطر 4 (211-310 kWh) (درهم/kWh)',
+      'electricityPuTranche5Label': 'سعر الوحدة الشطر 5 (311-510 kWh) (درهم/kWh)',
+      'electricityPuTranche6Label': 'سعر الوحدة الشطر 6 (>511 kWh) (درهم/kWh)',
+      'tvaLabel': 'ضريبة القيمة المضافة (%)',
+      'tppanLabel': 'TPPAN (درهم/kWh)',
+      'waterPuTranche4Label': 'الشطر 4 (21-35 م³) (درهم/م³)',
+      'waterPuTranche5Label': 'الشطر 5 (>35 م³) (درهم/م³)',
+      'assainissementTranche4Label': 'التطهير الشطر 4 (21-35 م³) (درهم/م³)',
+      'assainissementTranche5Label': 'التطهير الشطر 5 (>35 م³) (درهم/م³)',
     },
   };
 
-  String get billCalculator => _localizedValues[locale.languageCode]!['billCalculator']!;
-  String get settings => _localizedValues[locale.languageCode]!['settings']!;
-  String get selectBillType => _localizedValues[locale.languageCode]!['selectBillType']!;
-  String get electricity => _localizedValues[locale.languageCode]!['electricity']!;
-  String get water => _localizedValues[locale.languageCode]!['water']!;
-  String get electricityBillCalculator => _localizedValues[locale.languageCode]!['electricityBillCalculator']!;
-  String get waterBillCalculator => _localizedValues[locale.languageCode]!['waterBillCalculator']!;
-  String get enterMeterReadings => _localizedValues[locale.languageCode]!['enterMeterReadings']!;
+  String get billCalculator => _localizedValues[locale.languageCode]?['billCalculator'] ?? 'billCalculator';
+  String get settings => _localizedValues[locale.languageCode]?['settings'] ?? 'settings';
+  String get selectBillType => _localizedValues[locale.languageCode]?['selectBillType'] ?? 'selectBillType';
+  String get electricity => _localizedValues[locale.languageCode]?['electricity'] ?? 'electricity';
+  String get water => _localizedValues[locale.languageCode]?['water'] ?? 'water';
+  String get electricityBillCalculator => _localizedValues[locale.languageCode]?['electricityBillCalculator'] ?? 'electricityBillCalculator';
+  String get waterBillCalculator => _localizedValues[locale.languageCode]?['waterBillCalculator'] ?? 'waterBillCalculator';
+  String get enterMeterReadings => _localizedValues[locale.languageCode]?['enterMeterReadings'] ?? 'enterMeterReadings';
   String oldReading(String unit) => '${_localizedValues[locale.languageCode]!['oldReading']!} ($unit)';
   String newReading(String unit) => '${_localizedValues[locale.languageCode]!['newReading']!} ($unit)';
-  String get pleaseEnterOldReading => _localizedValues[locale.languageCode]!['pleaseEnterOldReading']!;
-  String get pleaseEnterNewReading => _localizedValues[locale.languageCode]!['pleaseEnterNewReading']!;
-  String get pleaseEnterAValidNumber => _localizedValues[locale.languageCode]!['pleaseEnterAValidNumber']!;
-  String get calculate => _localizedValues[locale.languageCode]!['calculate']!;
-  String get errorNewReading => _localizedValues[locale.languageCode]!['errorNewReading']!;
-  String get consumption => _localizedValues[locale.languageCode]!['consumption']!;
-  String get pu => _localizedValues[locale.languageCode]!['pu']!;
-  String get consumptionCost => _localizedValues[locale.languageCode]!['consumptionCost']!;
-  String get redevanceFixe => _localizedValues[locale.languageCode]!['redevanceFixe']!;
-  String get subtotal => _localizedValues[locale.languageCode]!['subtotal']!;
-  String get tva => _localizedValues[locale.languageCode]!['tva']!;
-  String get total => _localizedValues[locale.languageCode]!['total']!;
-  String get tranche1 => _localizedValues[locale.languageCode]!['tranche1']!;
-  String get tranche2 => _localizedValues[locale.languageCode]!['tranche2']!;
-  String get tranche3 => _localizedValues[locale.languageCode]!['tranche3']!;
-  String get waterCost => _localizedValues[locale.languageCode]!['waterCost']!;
-  String get assainissement => _localizedValues[locale.languageCode]!['assainissement']!;
-  String get theme => _localizedValues[locale.languageCode]!['theme']!;
-  String get systemDefault => _localizedValues[locale.languageCode]!['systemDefault']!;
-  String get light => _localizedValues[locale.languageCode]!['light']!;
-  String get dark => _localizedValues[locale.languageCode]!['dark']!;
-  String get electricitySettings => _localizedValues[locale.languageCode]!['electricitySettings']!;
-  String get redevanceFixeElectricite => _localizedValues[locale.languageCode]!['redevanceFixeElectricite']!;
-  String get redevanceFixeFacture => _localizedValues[locale.languageCode]!['redevanceFixeFacture']!;
-  String get waterSettings => _localizedValues[locale.languageCode]!['waterSettings']!;
-  String get puTranche1 => _localizedValues[locale.languageCode]!['puTranche1']!;
-  String get puTranche2 => _localizedValues[locale.languageCode]!['puTranche2']!;
-  String get puTranche3 => _localizedValues[locale.languageCode]!['puTranche3']!;
-  String get redevanceFixeEau => _localizedValues[locale.languageCode]!['redevanceFixeEau']!;
-  String get assainissementTranche1 => _localizedValues[locale.languageCode]!['assainissementTranche1']!;
-  String get assainissementTranche2 => _localizedValues[locale.languageCode]!['assainissementTranche2']!;
-  String get assainissementTranche3 => _localizedValues[locale.languageCode]!['assainissementTranche3']!;
-  String get redevanceFixeAssainissement => _localizedValues[locale.languageCode]!['redevanceFixeAssainissement']!;
-  String get language => _localizedValues[locale.languageCode]!['language']!;
-  String get about => _localizedValues[locale.languageCode]!['about']!;
+  String get pleaseEnterOldReading => _localizedValues[locale.languageCode]?['pleaseEnterOldReading'] ?? 'pleaseEnterOldReading';
+  String get pleaseEnterNewReading => _localizedValues[locale.languageCode]?['pleaseEnterNewReading'] ?? 'pleaseEnterNewReading';
+  String get pleaseEnterAValidNumber => _localizedValues[locale.languageCode]?['pleaseEnterAValidNumber'] ?? 'pleaseEnterAValidNumber';
+  String get calculate => _localizedValues[locale.languageCode]?['calculate'] ?? 'calculate';
+  String get errorNewReading => _localizedValues[locale.languageCode]?['errorNewReading'] ?? 'errorNewReading';
+  String get consumption => _localizedValues[locale.languageCode]?['consumption'] ?? 'consumption';
+  String get pu => _localizedValues[locale.languageCode]?['pu'] ?? 'pu';
+  String get consumptionCost => _localizedValues[locale.languageCode]?['consumptionCost'] ?? 'consumptionCost';
+  String get redevanceFixe => _localizedValues[locale.languageCode]?['redevanceFixe'] ?? 'redevanceFixe';
+  String get subtotal => _localizedValues[locale.languageCode]?['subtotal'] ?? 'subtotal';
+  String get tva => _localizedValues[locale.languageCode]?['tva'] ?? 'tva';
+  String get total => _localizedValues[locale.languageCode]?['total'] ?? 'total';
+  String get tranche1 => _localizedValues[locale.languageCode]?['tranche1'] ?? 'tranche1';
+  String get tranche2 => _localizedValues[locale.languageCode]?['tranche2'] ?? 'tranche2';
+  String get tranche3 => _localizedValues[locale.languageCode]?['tranche3'] ?? 'tranche3';
+  String get waterCost => _localizedValues[locale.languageCode]?['waterCost'] ?? 'waterCost';
+  String get assainissement => _localizedValues[locale.languageCode]?['assainissement'] ?? 'assainissement';
+  String get theme => _localizedValues[locale.languageCode]?['theme'] ?? 'theme';
+  String get systemDefault => _localizedValues[locale.languageCode]?['systemDefault'] ?? 'systemDefault';
+  String get light => _localizedValues[locale.languageCode]?['light'] ?? 'light';
+  String get dark => _localizedValues[locale.languageCode]?['dark'] ?? 'dark';
+  String get electricitySettings => _localizedValues[locale.languageCode]?['electricitySettings'] ?? 'electricitySettings';
+  String get redevanceFixeElectricite => _localizedValues[locale.languageCode]?['redevanceFixeElectricite'] ?? 'redevanceFixeElectricite';
+  String get redevanceFixeFacture => _localizedValues[locale.languageCode]?['redevanceFixeFacture'] ?? 'redevanceFixeFacture';
+  String get waterSettings => _localizedValues[locale.languageCode]?['waterSettings'] ?? 'waterSettings';
+  String get puTranche1 => _localizedValues[locale.languageCode]?['puTranche1'] ?? 'puTranche1';
+  String get puTranche2 => _localizedValues[locale.languageCode]?['puTranche2'] ?? 'puTranche2';
+  String get puTranche3 => _localizedValues[locale.languageCode]?['puTranche3'] ?? 'puTranche3';
+  String get redevanceFixeEau => _localizedValues[locale.languageCode]?['redevanceFixeEau'] ?? 'redevanceFixeEau';
+  String get assainissementTranche1 => _localizedValues[locale.languageCode]?['assainissementTranche1'] ?? 'assainissementTranche1';
+  String get assainissementTranche2 => _localizedValues[locale.languageCode]?['assainissementTranche2'] ?? 'assainissementTranche2';
+  String get assainissementTranche3 => _localizedValues[locale.languageCode]?['assainissementTranche3'] ?? 'assainissementTranche3';
+  String get redevanceFixeAssainissement => _localizedValues[locale.languageCode]?['redevanceFixeAssainissement'] ?? 'redevanceFixeAssainissement';
+  String get language => _localizedValues[locale.languageCode]?['language'] ?? 'language';
+  String get about => _localizedValues[locale.languageCode]?['about'] ?? 'about';
   String get developer => _localizedValues[locale.languageCode]?['developer'] ?? 'Developer';
   String get email => _localizedValues[locale.languageCode]?['email'] ?? 'Email';
   String get phone => _localizedValues[locale.languageCode]?['phone'] ?? 'Phone';
   String get appDescription => _localizedValues[locale.languageCode]?['appDescription'] ?? 'A utility app to calculate electricity and water bills based on consumption and tariff rates.';
+
+  String get langEnglish => _localizedValues[locale.languageCode]?['langEnglish'] ?? 'langEnglish';
+  String get langFrench => _localizedValues[locale.languageCode]?['langFrench'] ?? 'langFrench';
+  String get langArabic => _localizedValues[locale.languageCode]?['langArabic'] ?? 'langArabic';
+  String get electricityPuTranche1Label => _localizedValues[locale.languageCode]?['electricityPuTranche1Label'] ?? 'electricityPuTranche1Label';
+  String get electricityPuTranche2Label => _localizedValues[locale.languageCode]?['electricityPuTranche2Label'] ?? 'electricityPuTranche2Label';
+  String get electricityPuTranche3Label => _localizedValues[locale.languageCode]?['electricityPuTranche3Label'] ?? 'electricityPuTranche3Label';
+  String get electricityPuTranche4Label => _localizedValues[locale.languageCode]?['electricityPuTranche4Label'] ?? 'electricityPuTranche4Label';
+  String get electricityPuTranche5Label => _localizedValues[locale.languageCode]?['electricityPuTranche5Label'] ?? 'electricityPuTranche5Label';
+  String get electricityPuTranche6Label => _localizedValues[locale.languageCode]?['electricityPuTranche6Label'] ?? 'electricityPuTranche6Label';
+  String get tvaLabel => _localizedValues[locale.languageCode]?['tvaLabel'] ?? 'tvaLabel';
+  String get tppanLabel => _localizedValues[locale.languageCode]?['tppanLabel'] ?? 'tppanLabel';
+  String get waterPuTranche4Label => _localizedValues[locale.languageCode]?['waterPuTranche4Label'] ?? 'waterPuTranche4Label';
+  String get waterPuTranche5Label => _localizedValues[locale.languageCode]?['waterPuTranche5Label'] ?? 'waterPuTranche5Label';
+  String get assainissementTranche4Label => _localizedValues[locale.languageCode]?['assainissementTranche4Label'] ?? 'assainissementTranche4Label';
+  String get assainissementTranche5Label => _localizedValues[locale.languageCode]?['assainissementTranche5Label'] ?? 'assainissementTranche5Label';
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizationsManual> {

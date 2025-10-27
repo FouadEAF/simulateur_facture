@@ -1,109 +1,152 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart'; // Add this import
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsModel extends ChangeNotifier {
-  late ThemeMode _themeMode;
-  Locale? _appLocale; // User-selected locale
+  ThemeMode? _themeMode;
+  Locale? _appLocale;
+
   // Electricity settings
-  double _electricityPU = 0.966750; // Price per unit (DH/kWh)
-  double _electricityRedevanceFixe = 7.22; // Fixed charge
-  int _electricityRedevanceFacture = 1; // Number of invoices
-  double _electricityTVA = 27.75; // VAT percentage
-  
+  double? _electricityPUTranche1;
+  double? _electricityPUTranche2;
+  double? _electricityPUTranche3;
+  double? _electricityPUTranche4;
+  double? _electricityPUTranche5;
+  double? _electricityPUTranche6;
+  double? _electricityRedevanceFixe;
+  int? _electricityRedevanceFacture;
+  double? _electricityTVA;
+  double? _electricityTPPAN;
+
   // Water settings
-  double _waterPUTranche1 = 2.553500; // Price per unit for tier 1 (DH/m³)
-  double _waterPUTranche2 = 7.739200; // Price per unit for tier 2 (DH/m³)
-  double _waterPUTranche3 = 0.0; // Price per unit for tier 3 (DH/m³)
-  double _waterRedevanceFixe = 8.55; // Fixed water charge
-  double _assainissementTranche1 = 0.840100; // Sanitation tier 1
-  double _assainissementTranche2 = 1.734200; // Sanitation tier 2
-  double _assainissementTranche3 = 0.0; // Sanitation tier 3
-  double _assainissementRedevanceFixe = 5.00; // Fixed sanitation charge
-  double _waterTVA = 0.0; // VAT percentage
-  
-  // Getters
-  ThemeMode get themeMode => _themeMode;
-  Locale? get appLocale => _appLocale;
-  
+  double? _waterPUTranche1;
+  double? _waterPUTranche2;
+  double? _waterPUTranche3;
+  double? _waterPUTranche4;
+  double? _waterPUTranche5;
+  double? _waterRedevanceFixe;
+
+  // Sanitation settings
+  double? _assainissementTranche1;
+  double? _assainissementTranche2;
+  double? _assainissementTranche3;
+  double? _assainissementTranche4;
+  double? _assainissementTranche5;
+  double? _assainissementRedevanceFixe;
+  double? _waterTVA;
+
+  // Getters with default values
+  ThemeMode get themeMode => _themeMode ?? ThemeMode.system;
+  Locale? get appLocale => _appLocale ?? const Locale('en');
+
   // Electricity getters
-  double get electricityPU => _electricityPU;
-  double get electricityRedevanceFixe => _electricityRedevanceFixe;
-  int get electricityRedevanceFacture => _electricityRedevanceFacture;
-  double get electricityTVA => _electricityTVA;
-  
+  double get electricityPUTranche1 => _electricityPUTranche1 ?? 0.80;
+  double get electricityPUTranche2 => _electricityPUTranche2 ?? 0.90;
+  double get electricityPUTranche3 => _electricityPUTranche3 ?? 1.00;
+  double get electricityPUTranche4 => _electricityPUTranche4 ?? 1.00;
+  double get electricityPUTranche5 => _electricityPUTranche5 ?? 1.00;
+  double get electricityPUTranche6 => _electricityPUTranche6 ?? 1.00;
+  double get electricityRedevanceFixe => _electricityRedevanceFixe ?? 7.22;
+  int get electricityRedevanceFacture => _electricityRedevanceFacture ?? 1;
+  double get electricityTVA => _electricityTVA ?? 27.75;
+  double get electricityTPPAN => _electricityTPPAN ?? 0.00;
+
   // Water getters
-  double get waterPUTranche1 => _waterPUTranche1;
-  double get waterPUTranche2 => _waterPUTranche2;
-  double get waterPUTranche3 => _waterPUTranche3;
-  double get waterRedevanceFixe => _waterRedevanceFixe;
-  double get assainissementTranche1 => _assainissementTranche1;
-  double get assainissementTranche2 => _assainissementTranche2;
-  double get assainissementTranche3 => _assainissementTranche3;
-  double get assainissementRedevanceFixe => _assainissementRedevanceFixe;
-  double get waterTVA => _waterTVA;
+  double get waterPUTranche1 => _waterPUTranche1 ?? 2.553500;
+  double get waterPUTranche2 => _waterPUTranche2 ?? 7.739200;
+  double get waterPUTranche3 => _waterPUTranche3 ?? 1.000000;
+  double get waterPUTranche4 => _waterPUTranche4 ?? 1.000000;
+  double get waterPUTranche5 => _waterPUTranche5 ?? 1.000000;
+  double get waterRedevanceFixe => _waterRedevanceFixe ?? 8.55;
+
+  // Sanitation getters
+  double get assainissementTranche1 => _assainissementTranche1 ?? 0.840100;
+  double get assainissementTranche2 => _assainissementTranche2 ?? 1.734200;
+  double get assainissementTranche3 => _assainissementTranche3 ?? 1.000000;
+  double get assainissementTranche4 => _assainissementTranche4 ?? 1.000000;
+  double get assainissementTranche5 => _assainissementTranche5 ?? 1.000000;
+  double get assainissementRedevanceFixe => _assainissementRedevanceFixe ?? 5.00;
+  double get waterTVA => _waterTVA ?? 0.00;
 
   SettingsModel() {
-    _themeMode = ThemeMode.system; // Initialize with a default, will be overwritten by loaded settings
+    // The init() method will load saved preferences.
   }
 
-  // New: Asynchronous initialization method
   Future<void> init() async {
     final prefs = await SharedPreferences.getInstance();
-    
+
     _themeMode = ThemeMode.values[prefs.getInt('themeMode') ?? ThemeMode.system.index];
 
-    // Locale
     final String? langCode = prefs.getString('appLocale');
     if (langCode != null && langCode.isNotEmpty) {
       _appLocale = Locale(langCode);
     } else {
-      _appLocale = const Locale('en'); // Default to English if no setting is saved
+      _appLocale = const Locale('en');
     }
 
-    // Load Electricity settings
-    _electricityPU = prefs.getDouble('electricityPU') ?? 0.966750;
-    _electricityRedevanceFixe = prefs.getDouble('electricityRedevanceFixe') ?? 7.22;
-    _electricityRedevanceFacture = prefs.getInt('electricityRedevanceFacture') ?? 1;
-    _electricityTVA = prefs.getDouble('electricityTVA') ?? 27.75;
+    // Load settings, they will remain null if not in prefs, getters will provide defaults
+    _electricityPUTranche1 = prefs.getDouble('electricityPUTranche1');
+    _electricityPUTranche2 = prefs.getDouble('electricityPUTranche2');
+    _electricityPUTranche3 = prefs.getDouble('electricityPUTranche3');
+    _electricityPUTranche4 = prefs.getDouble('electricityPUTranche4');
+    _electricityPUTranche5 = prefs.getDouble('electricityPUTranche5');
+    _electricityPUTranche6 = prefs.getDouble('electricityPUTranche6');
+    _electricityRedevanceFixe = prefs.getDouble('electricityRedevanceFixe');
+    _electricityRedevanceFacture = prefs.getInt('electricityRedevanceFacture');
+    _electricityTVA = prefs.getDouble('electricityTVA');
+    _electricityTPPAN = prefs.getDouble('electricityTPPAN');
 
-    // Water settings
-    _waterPUTranche1 = prefs.getDouble('waterPUTranche1') ?? 2.553500;
-    _waterPUTranche2 = prefs.getDouble('waterPUTranche2') ?? 7.739200;
-    _waterPUTranche3 = prefs.getDouble('waterPUTranche3') ?? 0.0;
-    _waterRedevanceFixe = prefs.getDouble('waterRedevanceFixe') ?? 8.55;
-    _assainissementTranche1 = prefs.getDouble('assainissementTranche1') ?? 0.840100;
-    _assainissementTranche2 = prefs.getDouble('assainissementTranche2') ?? 1.734200;
-    _assainissementTranche3 = prefs.getDouble('assainissementTranche3') ?? 0.0;
-    _assainissementRedevanceFixe = prefs.getDouble('assainissementRedevanceFixe') ?? 5.00;
-    _waterTVA = prefs.getDouble('waterTVA') ?? 0.0;
+    _waterPUTranche1 = prefs.getDouble('waterPUTranche1');
+    _waterPUTranche2 = prefs.getDouble('waterPUTranche2');
+    _waterPUTranche3 = prefs.getDouble('waterPUTranche3');
+    _waterPUTranche4 = prefs.getDouble('waterPUTranche4');
+    _waterPUTranche5 = prefs.getDouble('waterPUTranche5');
+    _waterRedevanceFixe = prefs.getDouble('waterRedevanceFixe');
+
+    _assainissementTranche1 = prefs.getDouble('assainissementTranche1');
+    _assainissementTranche2 = prefs.getDouble('assainissementTranche2');
+    _assainissementTranche3 = prefs.getDouble('assainissementTranche3');
+    _assainissementTranche4 = prefs.getDouble('assainissementTranche4');
+    _assainissementTranche5 = prefs.getDouble('assainissementTranche5');
+    _assainissementRedevanceFixe = prefs.getDouble('assainissementRedevanceFixe');
+    _waterTVA = prefs.getDouble('waterTVA');
 
     notifyListeners();
   }
 
   Future<void> _saveSettings() async {
     final prefs = await SharedPreferences.getInstance();
-    
-    await prefs.setInt('themeMode', _themeMode.index);
 
-    // Locale
-    await prefs.setString('appLocale', _appLocale?.languageCode ?? '');
+    await prefs.setInt('themeMode', themeMode.index);
+    await prefs.setString('appLocale', appLocale?.languageCode ?? 'en');
 
     // Electricity settings
-    await prefs.setDouble('electricityPU', _electricityPU);
-    await prefs.setDouble('electricityRedevanceFixe', _electricityRedevanceFixe);
-    await prefs.setInt('electricityRedevanceFacture', _electricityRedevanceFacture);
-    await prefs.setDouble('electricityTVA', _electricityTVA);
+    await prefs.setDouble('electricityPUTranche1', electricityPUTranche1);
+    await prefs.setDouble('electricityPUTranche2', electricityPUTranche2);
+    await prefs.setDouble('electricityPUTranche3', electricityPUTranche3);
+    await prefs.setDouble('electricityPUTranche4', electricityPUTranche4);
+    await prefs.setDouble('electricityPUTranche5', electricityPUTranche5);
+    await prefs.setDouble('electricityPUTranche6', electricityPUTranche6);
+    await prefs.setDouble('electricityRedevanceFixe', electricityRedevanceFixe);
+    await prefs.setInt('electricityRedevanceFacture', electricityRedevanceFacture);
+    await prefs.setDouble('electricityTVA', electricityTVA);
+    await prefs.setDouble('electricityTPPAN', electricityTPPAN);
 
     // Water settings
-    await prefs.setDouble('waterPUTranche1', _waterPUTranche1);
-    await prefs.setDouble('waterPUTranche2', _waterPUTranche2);
-    await prefs.setDouble('waterPUTranche3', _waterPUTranche3);
-    await prefs.setDouble('waterRedevanceFixe', _waterRedevanceFixe);
-    await prefs.setDouble('assainissementTranche1', _assainissementTranche1);
-    await prefs.setDouble('assainissementTranche2', _assainissementTranche2);
-    await prefs.setDouble('assainissementTranche3', _assainissementTranche3);
-    await prefs.setDouble('assainissementRedevanceFixe', _assainissementRedevanceFixe);
-    await prefs.setDouble('waterTVA', _waterTVA);
+    await prefs.setDouble('waterPUTranche1', waterPUTranche1);
+    await prefs.setDouble('waterPUTranche2', waterPUTranche2);
+    await prefs.setDouble('waterPUTranche3', waterPUTranche3);
+    await prefs.setDouble('waterPUTranche4', waterPUTranche4);
+    await prefs.setDouble('waterPUTranche5', waterPUTranche5);
+    await prefs.setDouble('waterRedevanceFixe', waterRedevanceFixe);
+
+    // Sanitation settings
+    await prefs.setDouble('assainissementTranche1', assainissementTranche1);
+    await prefs.setDouble('assainissementTranche2', assainissementTranche2);
+    await prefs.setDouble('assainissementTranche3', assainissementTranche3);
+    await prefs.setDouble('assainissementTranche4', assainissementTranche4);
+    await prefs.setDouble('assainissementTranche5', assainissementTranche5);
+    await prefs.setDouble('assainissementRedevanceFixe', assainissementRedevanceFixe);
+    await prefs.setDouble('waterTVA', waterTVA);
   }
 
   void setThemeMode(ThemeMode mode) {
@@ -115,7 +158,6 @@ class SettingsModel extends ChangeNotifier {
   }
 
   void setAppLocale(Locale? locale) {
-    // If locale is null (which can happen with some UI controls), we default to English.
     final newLocale = locale ?? const Locale('en');
     if (_appLocale != newLocale) {
       _appLocale = newLocale;
@@ -123,10 +165,51 @@ class SettingsModel extends ChangeNotifier {
       notifyListeners();
     }
   }
-  // Electricity setters
-  void setElectricityPU(double value) {
-    if (_electricityPU != value) {
-      _electricityPU = value;
+
+  // Setters
+  void setElectricityPUTranche1(double value) {
+    if (_electricityPUTranche1 != value) {
+      _electricityPUTranche1 = value;
+      _saveSettings();
+      notifyListeners();
+    }
+  }
+
+  void setElectricityPUTranche2(double value) {
+    if (_electricityPUTranche2 != value) {
+      _electricityPUTranche2 = value;
+      _saveSettings();
+      notifyListeners();
+    }
+  }
+
+  void setElectricityPUTranche3(double value) {
+    if (_electricityPUTranche3 != value) {
+      _electricityPUTranche3 = value;
+      _saveSettings();
+      notifyListeners();
+    }
+  }
+
+  void setElectricityPUTranche4(double value) {
+    if (_electricityPUTranche4 != value) {
+      _electricityPUTranche4 = value;
+      _saveSettings();
+      notifyListeners();
+    }
+  }
+
+  void setElectricityPUTranche5(double value) {
+    if (_electricityPUTranche5 != value) {
+      _electricityPUTranche5 = value;
+      _saveSettings();
+      notifyListeners();
+    }
+  }
+
+  void setElectricityPUTranche6(double value) {
+    if (_electricityPUTranche6 != value) {
+      _electricityPUTranche6 = value;
       _saveSettings();
       notifyListeners();
     }
@@ -156,7 +239,14 @@ class SettingsModel extends ChangeNotifier {
     }
   }
 
-  // Water setters
+  void setElectricityTPPAN(double value) {
+    if (_electricityTPPAN != value) {
+      _electricityTPPAN = value;
+      _saveSettings();
+      notifyListeners();
+    }
+  }
+
   void setWaterPUTranche1(double value) {
     if (_waterPUTranche1 != value) {
       _waterPUTranche1 = value;
@@ -176,6 +266,22 @@ class SettingsModel extends ChangeNotifier {
   void setWaterPUTranche3(double value) {
     if (_waterPUTranche3 != value) {
       _waterPUTranche3 = value;
+      _saveSettings();
+      notifyListeners();
+    }
+  }
+
+  void setWaterPUTranche4(double value) {
+    if (_waterPUTranche4 != value) {
+      _waterPUTranche4 = value;
+      _saveSettings();
+      notifyListeners();
+    }
+  }
+
+  void setWaterPUTranche5(double value) {
+    if (_waterPUTranche5 != value) {
+      _waterPUTranche5 = value;
       _saveSettings();
       notifyListeners();
     }
@@ -208,6 +314,22 @@ class SettingsModel extends ChangeNotifier {
   void setAssainissementTranche3(double value) {
     if (_assainissementTranche3 != value) {
       _assainissementTranche3 = value;
+      _saveSettings();
+      notifyListeners();
+    }
+  }
+
+  void setAssainissementTranche4(double value) {
+    if (_assainissementTranche4 != value) {
+      _assainissementTranche4 = value;
+      _saveSettings();
+      notifyListeners();
+    }
+  }
+
+  void setAssainissementTranche5(double value) {
+    if (_assainissementTranche5 != value) {
+      _assainissementTranche5 = value;
       _saveSettings();
       notifyListeners();
     }

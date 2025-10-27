@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/settings_model.dart';
 import 'package:simulateur_facture/l10n/app_localizations_manual.dart';
+import '../widgets/about_dialog.dart';
 
 
 class SettingsScreen extends StatefulWidget {
@@ -51,18 +52,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onChanged: (Locale? newValue) {
                     settings.setAppLocale(newValue);
                   },
-                  items: const [
+                  items: [
                     DropdownMenuItem(
-                      value: Locale('en'),
-                      child: Text('English'),
+                      value: const Locale('en'),
+                      child: Text(l10n.langEnglish),
                     ),
                     DropdownMenuItem(
-                      value: Locale('fr'),
-                      child: Text('Français'),
+                      value: const Locale('fr'),
+                      child: Text(l10n.langFrench),
                     ),
                     DropdownMenuItem(
-                      value: Locale('ar'),
-                      child: Text('العربية'),
+                      value: const Locale('ar'),
+                      child: Text(l10n.langArabic),
                     ),
                   ],
                 ),
@@ -115,10 +116,50 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const Divider(),
               _buildRateField(
                 context,
-                '${l10n.pu} (DH/kWh)',
-                settings.electricityPU,
-                (value) => settings.setElectricityPU(value),
-                'electricityPU',
+                l10n.electricityPuTranche1Label,
+                settings.electricityPUTranche1,
+                (value) => settings.setElectricityPUTranche1(value),
+                'electricityPUTranche1',
+              ),
+              const SizedBox(height: 12),
+              _buildRateField(
+                context,
+                l10n.electricityPuTranche2Label,
+                settings.electricityPUTranche2,
+                (value) => settings.setElectricityPUTranche2(value),
+                'electricityPUTranche2',
+              ),
+              const SizedBox(height: 12),
+              _buildRateField(
+                context,
+                l10n.electricityPuTranche3Label,
+                settings.electricityPUTranche3,
+                (value) => settings.setElectricityPUTranche3(value),
+                'electricityPUTranche3',
+              ),
+              const SizedBox(height: 12),
+              _buildRateField(
+                context,
+                l10n.electricityPuTranche4Label,
+                settings.electricityPUTranche4,
+                (value) => settings.setElectricityPUTranche4(value),
+                'electricityPUTranche4',
+              ),
+              const SizedBox(height: 12),
+              _buildRateField(
+                context,
+                l10n.electricityPuTranche5Label,
+                settings.electricityPUTranche5,
+                (value) => settings.setElectricityPUTranche5(value),
+                'electricityPUTranche5',
+              ),
+              const SizedBox(height: 12),
+              _buildRateField(
+                context,
+                l10n.electricityPuTranche6Label,
+                settings.electricityPUTranche6,
+                (value) => settings.setElectricityPUTranche6(value),
+                'electricityPUTranche6',
               ),
               const SizedBox(height: 12),
               _buildRateField(
@@ -139,10 +180,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 12),
               _buildRateField(
                 context,
-                '${l10n.tva} (%)',
+                l10n.tvaLabel,
                 settings.electricityTVA,
                 (value) => settings.setElectricityTVA(value),
                 'electricityTVA',
+              ),
+              const SizedBox(height: 12),
+              _buildRateField(
+                context,
+                l10n.tppanLabel,
+                settings.electricityTPPAN,
+                (value) => settings.setElectricityTPPAN(value),
+                'electricityTPPAN',
               ),
               const SizedBox(height: 24),
               
@@ -174,6 +223,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 settings.waterPUTranche3,
                 (value) => settings.setWaterPUTranche3(value),
                 'waterPUTranche3',
+              ),
+              const SizedBox(height: 12),
+              _buildRateField(
+                context,
+                l10n.waterPuTranche4Label,
+                settings.waterPUTranche4,
+                (value) => settings.setWaterPUTranche4(value),
+                'waterPUTranche4',
+              ),
+              const SizedBox(height: 12),
+              _buildRateField(
+                context,
+                l10n.waterPuTranche5Label,
+                settings.waterPUTranche5,
+                (value) => settings.setWaterPUTranche5(value),
+                'waterPUTranche5',
               ),
               const SizedBox(height: 12),
               _buildRateField(
@@ -210,6 +275,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 12),
               _buildRateField(
                 context,
+                l10n.assainissementTranche4Label,
+                settings.assainissementTranche4,
+                (value) => settings.setAssainissementTranche4(value),
+                'assainissementTranche4',
+              ),
+              const SizedBox(height: 12),
+              _buildRateField(
+                context,
+                l10n.assainissementTranche5Label,
+                settings.assainissementTranche5,
+                (value) => settings.setAssainissementTranche5(value),
+                'assainissementTranche5',
+              ),
+              const SizedBox(height: 12),
+              _buildRateField(
+                context,
                 l10n.redevanceFixeAssainissement,
                 settings.assainissementRedevanceFixe,
                 (value) => settings.setAssainissementRedevanceFixe(value),
@@ -218,7 +299,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 12),
               _buildRateField(
                 context,
-                '${l10n.tva} (%)',
+                l10n.tvaLabel,
                 settings.waterTVA,
                 (value) => settings.setWaterTVA(value),
                 'waterTVA',
@@ -227,31 +308,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                 // About Section
                 const Divider(),
-                ListTile(
-                  title: Text(l10n.about),
-                  leading: const Icon(Icons.info_outline),
-                  onTap: () {
-                    showAboutDialog(
-                      context: context,
-                      applicationName: l10n.billCalculator,
-                      applicationVersion: "1.0.1",
-                      applicationIcon: const Icon(Icons.receipt_long, size: 48),
-                      children: [
-                        const SizedBox(height: 16),
-                        Text(
-                          '${l10n.developer}: EAF microservice',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 8),
-                        Text('${l10n.email}: EAF.microservice@gmail.com'),
-                        const SizedBox(height: 4),
-                        Text('${l10n.phone}: +212 645 994 904'),
-                        const SizedBox(height: 16),
-                        Text(l10n.appDescription),
-                      ],
-                    );
-                  },
-                ),
+                const AboutDialogWidget(),
             ],
           );
         },
@@ -262,14 +319,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildRateField(
     BuildContext context,
     String label,
-    double value,
+    double? value,
     Function(double) onChanged,
     String controllerKey, // New: Key for controller management
   ) {
-    final controller = _getController(controllerKey, value.toStringAsFixed(2));
+    // Handle null values by providing a default of 0.0
+    final safeValue = value ?? 0.0;
+    final controller = _getController(controllerKey, safeValue.toStringAsFixed(4));
     // Update controller text if the value changes from outside (e.g., loaded from prefs)
-    if (controller.text != value.toStringAsFixed(2)) {
-      controller.text = value.toStringAsFixed(2);
+    if (controller.text != safeValue.toStringAsFixed(4)) {
+      controller.text = safeValue.toStringAsFixed(4);
       controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
     }
     
@@ -292,14 +351,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildIntField(
     BuildContext context,
     String label,
-    int value,
+    int? value,
     Function(int) onChanged,
     String controllerKey, // New: Key for controller management
   ) {
-    final controller = _getController(controllerKey, value.toString());
+    // Handle null values by providing a default of 0
+    final safeValue = value ?? 0;
+    final controller = _getController(controllerKey, safeValue.toString());
     // Update controller text if the value changes from outside
-    if (controller.text != value.toString()) {
-      controller.text = value.toString();
+    if (controller.text != safeValue.toString()) {
+      controller.text = safeValue.toString();
       controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
     }
     
